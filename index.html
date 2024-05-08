@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>snow</title>
     <style>
+        body {
+            background: url(images/snow.jpg);
+            background-size: 100% auto;
+        }
 
         #video-background {
             position: fixed;
@@ -80,18 +84,32 @@
     </style>
 </head>
 <body>
-    <div id="video-background">
+    <!--<div id="video-background">
         <video autoplay loop muted id="video-background">
-            <source src="media/snow.mp4" type="video/mp4">
+            <source src="images/snow.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
-    </div>
+    </div>-->
     <div class="start-menu">
         <div class="list-subjects" id="show-subjects"></div>
         <a class="x0001 subjects" id="x0001" href="subject.html">x0001</a>
         <a class="x0002 subjects" id="x0002" href="subject.html">x0002</a>
     </div>
     <script>
+        // if logged in
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('loggedIn='))) {
+            var loggedIn = document.cookie.replace(/(?:(?:^|.*;\s*)loggedIn\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            if (loggedIn === "true") {
+                // user is logged in, show page
+            } else {
+                // user is not logged in, redirect to login
+                window.location.href = "/login.html";
+            }
+        } else {
+            // loggedIn cookie does not exist; redirect to login 
+            window.location.href = "/login.html";
+        }
+
         function displaySubjects(){
             subjectShow.style.visibility="hidden";
             var subjects = document.getElementsByClassName("subjects");

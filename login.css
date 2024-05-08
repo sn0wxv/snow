@@ -1,0 +1,220 @@
+body {
+    background-image: url(images/eldenring.png);
+    background-size: 100%;
+    z-index: 1;
+}
+
+#coded_by {
+    position: fixed;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    top: 90%;
+    z-index: 2;
+    font-family: monospace;
+    font-size: 2dvb;
+    color: rgb(225, 225, 225);
+    opacity: 90%;
+}
+
+.form_input {
+    position: fixed;
+    left: 50%;
+    top: 45%;
+    border: 1px solid white;
+    text-align: center;
+    color: rgb(0, 0, 0);
+
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255,);
+    backdrop-filter: blur(4px);
+}
+
+#password {
+    top: 45%;
+    margin-top: 25px;
+}
+
+.box {
+    border: 2px solid #fff;
+    border-radius: 12px;
+    opacity: 80%;
+    backdrop-filter: blur(2px);
+}
+
+#background {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    border: 15px 150px;
+    padding: 100% 100%;    
+}
+
+#start_button {
+    position: fixed;
+    left: 50%;
+    top: 45%;
+    margin-top: 120px;
+    transform: translate(-50%, -50%);
+    padding: 50px 60px;
+    cursor: pointer;
+    z-index: 4;
+    border-color: rgb(148, 148, 148);
+}
+
+#start_button:hover {
+    border-color: rgb(255, 255, 255) !important;
+}
+
+.menu {
+    visibility: hidden;
+}
+
+#background{
+    /*on click, change menu background to transition below*/
+    backdrop-filter: blur(2px);
+    -webkit-transition: backdrop-filter 100ms linear;
+    -ms-transition: backdrop-filter 100ms linear;
+    transition: backdrop-filter 100ms linear;
+}
+
+.menu_text {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    z-index: 5;
+
+    font-family: monospace;
+    font-size: 5dvb;
+    text-decoration: none;
+    color: rgb(236, 236, 236);
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.menu_text:hover {
+    color: rgb(146, 26, 26) !important;
+}
+
+#menu_box {
+    border-radius: 12px;
+    background-color: white;
+    opacity: 10%;
+    backdrop-filter: blur(2px);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 100% 150px;
+    z-index: 4;
+}
+
+#projects {
+    margin: -150px 0px;
+    z-index: 5;
+}
+
+#b {
+    margin: -50px 0px;
+    z-index: 5;
+}
+
+#c {
+    margin: 50px 0px;
+    z-index: 5;
+
+}
+
+#ily {
+    position: fixed;
+    color: rgb(168, 123, 123);
+    font-family: monospace;
+    font-size: 10px;
+    z-index: 10;
+}
+
+#d {
+    margin: 150px 0px;
+    z-index: 5;
+}
+
+#intro_box {
+    position: fixed;
+    left: 15%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 220px 150px;
+    border-radius: 3px;
+    background-color: rgb(35, 35, 35);
+    border-color: rgb(66, 66, 66) !important;
+    z-index: 5;
+}
+
+#intro_box_background {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 220px 145px;
+    background-color: rgb(48, 48, 48);
+    z-index: 6;
+}
+
+#url_rectangle {
+    position: fixed;
+    border-radius: 24px;
+    margin: -185px 40px;
+    left: 25%;
+    background-color: rgb(186, 186, 186);
+    width: 160px;
+    height: 22px;
+    z-index: 7;
+}
+
+#url {
+    position: fixed;
+    color:#000000;
+    margin: 3px 10px;
+    font-family: monospace;
+    z-index: 8;
+}
+
+#parallelogram {
+    position: fixed;
+    top: 0%;
+    left: 60%;
+	width: 80px;
+	height: 22px;
+	transform: skew(20deg);
+    background-color: rgb(35, 35, 35);
+    z-index: 7;
+}
+
+#rectangle {
+    position: fixed;
+    top: 0%;
+    left: 72%;
+	width: 80px;
+	height: 22px;
+    background-color: rgb(35, 35, 35);
+    z-index: 7;
+}
+
+#x_button {
+    position: fixed;
+    top: 1px;
+    left: 155px;
+    font-family: monospace;
+    font-size: 15px;
+    color: white;
+    z-index: 8;
+    cursor: pointer;
+}
+
+#x_button:hover {
+    color: rgb(146, 26, 26) !important;
+}
+
+#aki {
+    position: fixed;
+}

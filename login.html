@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>aki</title>
+        <link rel="stylesheet" href="login.css">
+    </head>
+    <body>
+        <div id="coded_by">coded by aki</div>
+        <div>
+            <form class="login_form">
+                <input type="text" autocomplete="off" placeholder="username" id="username" class="form_input">
+                <input type="password" autocomplete="off" placeholder="password" id="password" class="form_input">
+            </form>
+        </div>
+        <a class="box" id="start_button"></a>
+        <div id="desktop_menu"></div>
+        <div class="menu">
+            <!-- menu that appears after someone logs in and clicks the button -->
+        <nav>
+            <div id="menu_box"></div>
+            <a id="background"></a>
+            <a class="menu_text" id="projects" href="projects.html">projects</a>
+            <a class="menu_text" id="b">filler</a>
+            <a class="menu_text" id="c">socials</a>
+            <a class="menu_text" id="d">about</a>
+        </nav>
+        </div>
+        
+        <script>
+function openMenu (){
+    var menu = document.querySelectorAll(".menu"); 
+    for(let i = 0; i < menu.length; i++){
+        menu[i].style.visibility = "visible";
+    }
+    var start = document.querySelector("#start_button");
+    start.style.visibility = "hidden";
+
+}   
+
+// function to change front page colors + openMenu
+function changeColor() {
+        // select each element
+    var username = document.querySelector("#username");
+    var password = document.querySelector("#password");
+    var coded = document.querySelector("#coded_by");
+    var background = document.querySelector("body");
+    var start_button = document.querySelector("#start_button");
+
+        // if username and password are correct, turn blue and return true
+    if(username.value == "aki" && password.value == "aki"){
+        document.cookie="loggedIn=true; path=/";
+        //set colors to blue
+        coded.style.color = "lightblue";
+        start_button.style.borderColor = "lightblue";
+        background.style.backgroundImage = "url('images/eldenringblue.png')";
+        //allow user to click button
+        var button = document.querySelector("#start_button");
+        button.addEventListener("click", openMenu); 
+        // else turn red and return false
+    } else {
+        document.cookie = "loggedIn=false";
+        coded.style.color = "red";
+        start_button.style.borderColor = "red";
+        background.style.backgroundImage = "url('images/eldenringred.png')";
+        username.value = "";
+        password.value = "";
+        return;
+    }
+}
+
+// check for password change, initiate changeColor function
+var passwordInput = document.querySelector("#password");
+passwordInput.addEventListener("change", changeColor);
+        </script>
+    </body>
+    <footer>
+    </footer>
+</html>
+
+echo "YRIRY GJB CNFFJBEQ EBGGRA" | tr -t "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"
