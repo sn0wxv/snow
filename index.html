@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snow</title>
+    <style>
+
+        #video-background {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1000;
+            overflow: hidden;
+        }
+        
+        #video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .start-menu {
+            position: fixed;
+            width: 900px;
+            height: 700px;
+            left: 50%;
+            top: 50%;
+            backdrop-filter: blur(0px);
+            transform: translate(-50%, -50%);
+        }
+
+        .list-subjects {
+            position: inherit;
+            width: 100px;
+            height: 100px;
+            border: 2px solid white;
+            left: 480px;
+            top: 50%;
+            transform: translate(-50%);
+            cursor: pointer;
+            visibility: visible;
+        }
+
+        .subjects {
+            visibility: hidden;
+        }
+
+        .x0001 {
+            position: inherit;
+            width: 150px;
+            height: 50px;
+            border: 2px solid white;
+            left: 20px;
+            top: 20px;
+            text-align: center;
+            color: black;
+            font-size: 18px;
+            line-height: 47.5px;
+        }
+
+        .x0002 {
+            position: inherit;
+            width: 150px;
+            height: 50px;
+            border: 2px solid white;
+            left: 190px;
+            top: 20px;
+            text-align: center;
+            color: black;
+            font-size: 18px;
+            line-height: 47.5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-background">
+        <video autoplay loop muted id="video-background">
+            <source src="media/snow.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+    <div class="start-menu">
+        <div class="list-subjects" id="show-subjects"></div>
+        <a class="x0001 subjects" id="x0001" href="subject.html">x0001</a>
+        <a class="x0002 subjects" id="x0002" href="subject.html">x0002</a>
+    </div>
+    <script>
+        function displaySubjects(){
+            subjectShow.style.visibility="hidden";
+            var subjects = document.getElementsByClassName("subjects");
+            for (var i = 0; i < subjects.length; i++){
+                subjects[i].style.visibility = "visible";
+            }
+        }
+        
+        var subjectShow = document.getElementById("show-subjects");
+        subjectShow.addEventListener("click", displaySubjects);
+    </script>
+</body>
+</html>

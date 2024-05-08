@@ -1,0 +1,67 @@
+body {
+    background: url(images/snow.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;   
+}
+
+
+.start-menu {
+    position: fixed;
+    width: 900px;
+    height: 700px;
+    border: 2px solid white;
+    left: 50%;
+    top: 50%;
+    backdrop-filter: blur(10px);
+    transform: translate(-50%, -50%);
+}
+
+.list-subjects {
+    position: inherit;
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    left: 450px;
+    top: 50px;
+    transform: translate(-50%);
+    cursor: pointer;
+    visibility: visible;
+}
+
+.subjects {
+    position: inherit;
+    border: 2px white solid;
+    width: 100%;
+    height: 100%;
+    left: 450px;
+    top: 350px;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    visibility: hidden;
+}
+
+.x0001 {
+    position: inherit;
+    width: 150px;
+    height: 50px;
+    border: 2px solid white;
+    left: 20px;
+    top: 20px;
+    text-align: center;
+    color: black;
+    font-size: 18px;
+    line-height: 47.5px;
+}
+
+.x0002 {
+    position: inherit;
+    width: 150px;
+    height: 50px;
+    border: 2px solid white;
+    left: 190px;
+    top: 20px;
+    text-align: center;
+    color: black;
+    font-size: 18px;
+    line-height: 47.5px;
+}

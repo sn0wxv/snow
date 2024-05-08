@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snow</title>
+    <style>
+        body {
+            background: black;
+        }
+
+        #video-background {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1000;
+            overflow: hidden;
+        }
+        
+        #video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .start-menu {
+            position: fixed;
+            width: 900px;
+            height: 700px;
+            border: 2px solid white;
+            left: 50%;
+            top: 50%;
+            backdrop-filter: blur(0px);
+            transform: translate(-50%, -50%);
+        }
+
+        .subjects {
+            visibility: hidden;
+        }
+
+        .x0001 {
+            position: inherit;
+            width: 150px;
+            height: 50px;
+            border: 2px solid white;
+            left: 20px;
+            top: 20px;
+            text-align: center;
+            color: black;
+            font-size: 18px;
+            line-height: 47.5px;
+        }
+
+        .x0002 {
+            position: inherit;
+            width: 150px;
+            height: 50px;
+            border: 2px solid white;
+            left: 190px;
+            top: 20px;
+            text-align: center;
+            color: black;
+            font-size: 18px;
+            line-height: 47.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="subject-information-container">
+        <div class="name"></div>
+        <div class="aliases"></div>
+        <div class="facebook"></div>
+        <div class="instagram"></div>
+        <div class="twitter"></div>
+        <div class="phone-number"></div>
+        <div class="address"></div>
+
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>
