@@ -30,7 +30,7 @@ function login() {
     var start_button = document.querySelector("#start_button");
 
     // if username and password are correct, turn blue and return true
-    if(username.value == "aki" && password.value == "aki"){
+    if((username.value == "aki" && password.value == "aki") || (username.value == "nine" && password.value == "nine")){
         // set cookie to true
         document.cookie="loggedIn=true; path=/";
 
