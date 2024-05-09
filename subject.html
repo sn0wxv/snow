@@ -7,82 +7,209 @@
     <style>
         body {
             background: black;
-        }
-
-        #video-background {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1000;
-            overflow: hidden;
-        }
-        
-        #video-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
+            background-image: url(images/snow.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh; /* Ensure body fills the viewport height */
             overflow: hidden;
         }
 
-        .start-menu {
+        .back-button {
+            color: white;
+            top: 0px;
+            left: 40px;
+            font-size: 42px;
+            font-family: 'monospace';
+            text-decoration: none;
+            position: absolute;
+            height: 50px;
+            width: 100px;
+        }
+
+        .subject {
             position: fixed;
-            width: 900px;
-            height: 700px;
-            border: 2px solid white;
+            left: 50%;
+            top: 10%;
+            transform: translate(-50%, -20%);
+            font-size: 36px;
+            color: white;
+        }
+
+        .information-container {
+            position: fixed;
+            width: 280px;
+            height: 500px;
+            border: 2px solid rgb(165, 165, 165);
+            border-radius: 12px;
+            left: 60%;
+            top: 50%;
+            transform: translate(40%, -50%);
+            z-index: 2;
+        }
+
+        .details {
+            background: transparent;
+            color: white;
+            border-radius: 12px;
+            border: none;
+            position: fixed;
             left: 50%;
             top: 50%;
-            backdrop-filter: blur(0px);
-            transform: translate(-50%, -50%);
+            transform: translate(-65%, -50%);
+            height: 500px;
+            width: 600px;
+            resize: none; 
+            overflow: hidden;
+            font-family: sans-serif;
+            font-size: inherit; 
+            outline: none;
         }
 
-        .subjects {
-            visibility: hidden;
-        }
-
-        .x0001 {
+        .id-input {
             position: inherit;
-            width: 150px;
-            height: 50px;
-            border: 2px solid white;
-            left: 20px;
-            top: 20px;
-            text-align: center;
-            color: black;
-            font-size: 18px;
-            line-height: 47.5px;
+            width: 270px;
+            height: 30px;
+            color: white;
+            outline: none;
+            border: none;
+            background-color: transparent;
         }
 
-        .x0002 {
-            position: inherit;
-            width: 150px;
-            height: 50px;
-            border: 2px solid white;
-            left: 190px;
-            top: 20px;
-            text-align: center;
-            color: black;
-            font-size: 18px;
-            line-height: 47.5px;
+        .name {
+            top: 10px;
         }
+
+        .aliases {
+            top: 40px;
+        }
+
+        .facebook {
+            top: 70px;
+        }
+
+        .instagram {
+            top: 100px;
+        }
+
+        .twitter {
+            top: 130px;
+        }
+
+        .phone-number {
+            top: 160px;
+        }
+
+        .address {
+            top: 190px;
+        }
+
+        .ip {
+            top: 220px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="subject-information-container">
-        <div class="name"></div>
-        <div class="aliases"></div>
-        <div class="facebook"></div>
-        <div class="instagram"></div>
-        <div class="twitter"></div>
-        <div class="phone-number"></div>
-        <div class="address"></div>
-
+    <a class="back-button" href="index.html"><</a>
+    <div class="subject" id="subject">Subject</div>
+    <div class="container">
+        <div class="information-container">
+            <input class="name id-input" spellcheck="false" value="Name: "></input>
+            <input class="aliases id-input" spellcheck="false" value="Aliases: "></input>
+            <input class="facebook id-input" spellcheck="false" value="Facebook: "></input>
+            <input class="instagram id-input" spellcheck="false" value="Instagram: "></input>
+            <input class="twitter id-input" spellcheck="false" value="Twitter: "></input>
+            <input class="phone-number id-input" spellcheck="false" value="Phone Number: "></input>
+            <input class="address id-input" spellcheck="false" value="Address: "></input>
+            <input class="ip id-input" spellcheck="false" value="IP Address: "></input>
+        </div>
+        <textarea rows="4" cols="40" class="details" spellcheck="false"></textarea>
     </div>
     <script>
+        // if logged in
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('loggedIn='))) {
+            var loggedIn = document.cookie.replace(/(?:(?:^|.*;\s*)loggedIn\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            if (loggedIn === "true") {
+                // user is logged in, show page
+            } else {
+                // user is not logged in, redirect to login
+                window.location.href = "/login.html";
+            }
+        } else {
+            // loggedIn cookie does not exist; redirect to login 
+            window.location.href = "/login.html";
+        }
+
+        // selected subject page
+        const selectedSubject = localStorage.getItem('selectedSubject');
+        let subjectTitle = document.getElementById("subject");
+        subjectTitle.innerHTML="Subject " + selectedSubject;
+
+         // Get all input fields and the textarea
+        const inputs = document.querySelectorAll('.id-input');
+        const textarea = document.querySelector('.details');
+
+        // Attach event listeners to all input fields and the textarea
+        inputs.forEach(input => {
+            input.addEventListener('input', saveToJson);
+        });
+        textarea.addEventListener('input', saveToJson);
+
+        // Function to save JSON to local storage
+        function saveToJson() {
+            // Get user inputs
+            const name = document.querySelector('.name').value;
+            const aliases = document.querySelector('.aliases').value;
+            const facebook = document.querySelector('.facebook').value;
+            const instagram = document.querySelector('.instagram').value;
+            const twitter = document.querySelector('.twitter').value;
+            const phoneNumber = document.querySelector('.phone-number').value;
+            const address = document.querySelector('.address').value;
+            const details = document.querySelector('.details').value;
+            const ip = document.querySelector('.ip').value;
+
+            // Create JSON object
+            const jsonObject = {
+                "name": name,
+                "aliases": aliases,
+                "facebook": facebook,
+                "instagram": instagram,
+                "twitter": twitter,
+                "phone_number": phoneNumber,
+                "address": address,
+                "ip": ip,
+                "details": details
+            };
+
+            // Convert JSON object to string
+            const jsonString = JSON.stringify(jsonObject);
+
+            // Save JSON string to local storage
+            localStorage.setItem(selectedSubject, jsonString);
+        }
+
+        // Event listener to trigger saveToJson() function on input change
+        document.querySelectorAll('.id-input, .details').forEach(input => {
+            input.addEventListener('input', saveToJson);
+        });
+
+        // Load saved data from local storage on page load
+        window.addEventListener('load', function() {
+            const savedData = localStorage.getItem(selectedSubject);
+            if (savedData) {
+                const jsonObject = JSON.parse(savedData);
+                document.querySelector('.name').value = jsonObject.name;
+                document.querySelector('.aliases').value = jsonObject.aliases;
+                document.querySelector('.facebook').value = jsonObject.facebook;
+                document.querySelector('.instagram').value = jsonObject.instagram;
+                document.querySelector('.twitter').value = jsonObject.twitter;
+                document.querySelector('.phone-number').value = jsonObject.phone_number;
+                document.querySelector('.address').value = jsonObject.address;
+                document.querySelector('.ip').value = jsonObject.ip;
+                document.querySelector('.details').value = jsonObject.details;
+            }
+        });
         
     </script>
 </body>

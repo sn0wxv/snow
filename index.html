@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>snow</title>
     <style>
-        body {
-            background: url(images/snow.jpg);
-            background-size: 100% auto;
-        }
 
         #video-background {
             position: fixed;
@@ -40,60 +36,121 @@
             transform: translate(-50%, -50%);
         }
 
-        .list-subjects {
-            position: inherit;
-            width: 100px;
-            height: 100px;
-            border: 2px solid white;
-            left: 480px;
-            top: 50%;
-            transform: translate(-50%);
-            cursor: pointer;
-            visibility: visible;
-        }
-
         .subjects {
-            visibility: hidden;
+            border-radius: 8px;
+            border-color: rgb(148, 148, 148);
+            position: inherit;
+            width: 150px;
+            height: 50px;
+            border: 2px solid rgb(0, 0, 0);
+            text-align: center;
+            color: black;
+            font-size: 18px;
+            line-height: 47.5px;
         }
 
         .x0001 {
-            position: inherit;
-            width: 150px;
-            height: 50px;
-            border: 2px solid white;
             left: 20px;
             top: 20px;
-            text-align: center;
-            color: black;
-            font-size: 18px;
-            line-height: 47.5px;
         }
 
         .x0002 {
-            position: inherit;
-            width: 150px;
-            height: 50px;
-            border: 2px solid white;
             left: 190px;
             top: 20px;
-            text-align: center;
-            color: black;
-            font-size: 18px;
-            line-height: 47.5px;
         }
+
+        .x0003 {
+            left: 360px;
+            top: 20px;
+        }
+
+        .x0004 {
+            left: 530px;
+            top: 20px;
+        }
+
+        .x0005 {
+            left: 700px;
+            top: 20px;
+        }
+        
+        .x0006 {
+            left: 20px;
+            top: 90px;
+        }
+
+        .x0007 {
+            left: 190px;
+            top: 90px;
+        }
+        
+        .x0008 {
+            left: 360px;
+            top: 90px;
+        }
+
+        .x0009 {
+            left: 530px;
+            top: 90px;
+        }
+        
+        .x0010 {
+            left: 700px;
+            top: 90px;
+        }
+
+        .x0011 {
+            left: 20px;
+            top: 160px;
+        }
+        
+        .x0012 {
+            left: 190px;
+            top: 160px;
+        }
+
+        .x0013 {
+            left: 360px;
+            top: 160px;
+        }
+
+        .x0014 {
+            left: 530px;
+            top: 160px;
+        }
+
+        .x0015 {
+            left: 700px;
+            top: 160px;
+        }
+        
+        
+
     </style>
 </head>
 <body>
-    <!--<div id="video-background">
+    <div id="video-background">
         <video autoplay loop muted id="video-background">
             <source src="images/snow.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
-    </div>-->
+    </div>
     <div class="start-menu">
-        <div class="list-subjects" id="show-subjects"></div>
         <a class="x0001 subjects" id="x0001" href="subject.html">x0001</a>
         <a class="x0002 subjects" id="x0002" href="subject.html">x0002</a>
+        <a class="x0003 subjects" id="x0003" href="subject.html">x0003</a>
+        <a class="x0004 subjects" id="x0004" href="subject.html">x0004</a>
+        <a class="x0005 subjects" id="x0005" href="subject.html">x0005</a>
+        <a class="x0006 subjects" id="x0006" href="subject.html">x0006</a>
+        <a class="x0007 subjects" id="x0007" href="subject.html">x0007</a>
+        <a class="x0008 subjects" id="x0008" href="subject.html">x0008</a>
+        <a class="x0009 subjects" id="x0009" href="subject.html">x0009</a>
+        <a class="x0010 subjects" id="x0010" href="subject.html">x0010</a>
+        <a class="x0011 subjects" id="x0011" href="subject.html">x0011</a>
+        <a class="x0012 subjects" id="x0012" href="subject.html">x0012</a>
+        <a class="x0013 subjects" id="x0013" href="subject.html">x0013</a>
+        <a class="x0014 subjects" id="x0014" href="subject.html">x0014</a>
+        <a class="x0015 subjects" id="x0015" href="subject.html">x0015</a>
     </div>
     <script>
         // if logged in
@@ -109,17 +166,24 @@
             // loggedIn cookie does not exist; redirect to login 
             window.location.href = "/login.html";
         }
-
-        function displaySubjects(){
-            subjectShow.style.visibility="hidden";
-            var subjects = document.getElementsByClassName("subjects");
-            for (var i = 0; i < subjects.length; i++){
-                subjects[i].style.visibility = "visible";
-            }
-        }
         
-        var subjectShow = document.getElementById("show-subjects");
-        subjectShow.addEventListener("click", displaySubjects);
+        const subjects = document.querySelectorAll('.subjects');
+
+        subjects.forEach(subject => {
+            subject.addEventListener('click', function(event) {
+
+                // get the id of the clicked element
+                const clickedId = this.id;
+
+                // Save the clickedId to localStorage
+                localStorage.setItem('selectedSubject', clickedId);
+                console.log(clickedId);
+
+                // Optionally, you can navigate to the href value
+                // window.location.href = this.href;
+            });
+        });   
+
     </script>
 </body>
 </html>
