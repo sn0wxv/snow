@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>snow</title>
+    <link rel="icon" type="image/x-icon" href="/icons/grey-snow.png">
     <style>
 
-        #video-background {
+        body {
+            background-image: url(images/red.jpg);
+        }
+
+        /*#video-background {
             position: fixed;
             left: 50%;
             top: 50%;
@@ -24,12 +29,12 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-        }
+        }*/
 
         .start-menu {
             position: fixed;
             width: 900px;
-            height: 700px;
+            height: 300px;
             left: 50%;
             top: 50%;
             backdrop-filter: blur(0px);
@@ -38,13 +43,12 @@
 
         .subjects {
             border-radius: 8px;
-            border-color: rgb(148, 148, 148);
-            position: inherit;
+            position: absolute;
             width: 150px;
             height: 50px;
-            border: 2px solid rgb(0, 0, 0);
+            border: 2px solid rgb(238, 238, 238);
             text-align: center;
-            color: black;
+            color: rgb(228, 228, 228);
             font-size: 18px;
             line-height: 47.5px;
         }
@@ -129,12 +133,12 @@
     </style>
 </head>
 <body>
-    <div id="video-background">
+    <!--<div id="video-background">
         <video autoplay loop muted id="video-background">
             <source src="images/snow.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
-    </div>
+    </div>-->
     <div class="start-menu">
         <a class="x0001 subjects" id="x0001" href="subject.html">x0001</a>
         <a class="x0002 subjects" id="x0002" href="subject.html">x0002</a>
@@ -153,22 +157,7 @@
         <a class="x0015 subjects" id="x0015" href="subject.html">x0015</a>
     </div>
     <script>
-        // if logged in
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('loggedIn='))) {
-            var loggedIn = document.cookie.replace(/(?:(?:^|.*;\s*)loggedIn\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-            if (loggedIn === "true") {
-                // user is logged in, show page
-            } else {
-                // user is not logged in, redirect to login
-                window.location.href = "login.html";
-            }
-        } else {
-            // loggedIn cookie does not exist; redirect to login 
-            window.location.href = "login.html";
-        }
-        
         const subjects = document.querySelectorAll('.subjects');
-
         subjects.forEach(subject => {
             subject.addEventListener('click', function(event) {
 

@@ -1,22 +1,29 @@
 <!DOCTYPE html>
+<!-- RED color: rgb(94, 11, 11);-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>snow</title>
+    <link rel="icon" type="image/x-icon" href="/icons/grey-snow.png">
     <style>
         body {
-            background: black;
-            background-image: url(images/snow.jpg);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 100vh; /* Ensure body fills the viewport height */
+            background: url(images/red.jpg);
+            background-color: black;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1000;
             overflow: hidden;
         }
 
         .back-button {
-            color: white;
+            color: rgb(88, 18, 18);
             top: 0px;
             left: 40px;
             font-size: 42px;
@@ -25,192 +32,1527 @@
             position: absolute;
             height: 50px;
             width: 100px;
+            z-index: 4;
         }
 
-        .subject {
+        .background-darken {
+            background-color: black;
             position: fixed;
             left: 50%;
-            top: 10%;
-            transform: translate(-50%, -20%);
-            font-size: 36px;
-            color: white;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 110%;
+            opacity: 50%;
         }
 
-        .information-container {
+        h2 {
+            color: rgb(207, 207, 207);
+            font-size: 11px;
+            font-family: 'Arial Narrow Bold';
+        }
+
+        .full-container {
             position: fixed;
-            width: 280px;
-            height: 500px;
-            border: 2px solid rgb(165, 165, 165);
-            border-radius: 12px;
-            left: 60%;
+            width: 1200px;
+            height: 800px;
+            border-radius: 20px;
+            left: 50%;
             top: 50%;
-            transform: translate(40%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        
+        .subject {
+            position: fixed;
+            height: 50px;
+            width: 250px;
+            left: 620px;
+            color: white;
+            text-align: center;
+            z-index: 3;
+            font-size: 14px;
+        }
+        
+        .evidence-container {
+            position: relative;
+            background-color: rgba(19, 19, 19, 0.9);
+            width: 325px;
+            height: 200px;
+            border-radius: 20px;
+            left: 875px;
+            top: 20px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .evidence {
+            position: absolute;
+            font-size: 14px;
+            top: 10px;
+            left: 22px;
+        }
+        
+        .identity-evidence {
+            position: absolute;
+            top: 50px;
+            left: 65px;
+        }
+
+        .identity-folder-icon {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            left: 220px;
+            top: 36px;
+            object-fit: contain;
+            background-image: url(icons/folder\ icon.png);
+            transform: scale(0.4);
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .identity-container {
+            position: absolute;
+            width: 300px;
+            height: 800px;
+            top: -20px;
+            left: 350px;
+            background-color: rgb(221, 221, 221);
+            border-radius: 20px;
             z-index: 2;
+        }
+
+        #identity-container {
+            visibility: hidden;
+        }
+
+        .identity-title {
+            position: absolute;
+            color: black;
+            left: 50%;
+            top: 10px;
+            font-size: 14px;
+            text-wrap: nowrap;
+            transform: translate(-50%);
+        }
+
+        .file-upload {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+
+        .chat-container {
+            position: absolute;
+            width: 300px;
+            height: 800px;
+            top: -20px;
+            left: 350px;
+            background-color: rgb(221, 221, 221);
+            border-radius: 20px;
+            z-index: 2;
+            visibility: hidden;
+        }
+
+        .chat-log-title {
+            position: absolute;
+            color: black;
+            left: 50%;
+            top: 10px;
+            font-size: 14px;
+            text-wrap: nowrap;
+            transform: translate(-50%);
+        }
+
+        .location-evidence-title {
+            position: absolute;
+            color: black;
+            left: 50%;
+            top: 10px;
+            font-size: 14px;
+            text-wrap: nowrap;
+            transform: translate(-50%);
+        }
+
+        #imageContainer1, #imageContainer11, #imageContainer21 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 30px;
+            top: 60px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+        
+        #imageContainer2, #imageContainer12, #imageContainer22 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 165px;
+            top: 60px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer3, #imageContainer13, #imageContainer23 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 30px;
+            top: 190px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer4, #imageContainer14, #imageContainer24 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 165px;
+            top: 190px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+        
+        #imageContainer5, #imageContainer15, #imageContainer25 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 30px;
+            top: 320px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer6, #imageContainer16, #imageContainer26 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 165px;
+            top: 320px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer7, #imageContainer17, #imageContainer27 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 30px;
+            top: 450px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer8, #imageContainer18, #imageContainer28 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 165px;
+            top: 450px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer9, #imageContainer19, #imageContainer29 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 30px;
+            top: 580px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        #imageContainer10, #imageContainer20, #imageContainer30 {
+            position: absolute;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            left: 165px;
+            top: 580px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0; /* Default background color */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            z-index: 15;
+        }
+        
+        #imageContainer1 img, #imageContainer2 img, #imageContainer3 img, #imageContainer4 img, #imageContainer5 img, #imageContainer6 img, #imageContainer7 img, #imageContainer8 img, #imageContainer9 img, #imageContainer10 img, #imageContainer11 img, #imageContainer12 img, #imageContainer13 img, #imageContainer14 img, #imageContainer15 img, #imageContainer16 img, #imageContainer17 img, #imageContainer18 img, #imageContainer19 img, #imageContainer20 img, #imageContainer21 img, #imageContainer22 img, #imageContainer23 img, #imageContainer24 img, #imageContainer25 img, #imageContainer26 img, #imageContainer27 img, #imageContainer28 img, #imageContainer29 img, #imageContainer30 img  {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 101;
+        }
+
+        .chat-folder-icon {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            left: 220px;
+            top: 66px;
+            object-fit: contain;
+            background-image: url(icons/folder\ icon.png);
+            transform: scale(0.4);
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .location-folder-icon {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            left: 220px;
+            top: 96px;
+            object-fit: contain;
+            background-image: url(icons/folder\ icon.png);
+            transform: scale(0.4);
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .location-menu-container {
+            position: absolute;
+            width: 300px;
+            height: 800px;
+            top: -20px;
+            left: 350px;
+            background-color: rgb(221, 221, 221);
+            border-radius: 20px;
+            z-index: 2;
+            visibility: hidden;
+        }
+
+        .chat-evidence {
+            position: absolute;
+            top: 80px;
+            left: 65px;
+        }
+
+        .location-evidence {
+            position: absolute;
+            top: 110px;
+            left: 65px;
+        }
+
+        .documents-line {
+            position: absolute;
+            height: 3px;
+            width: 175px;
+            left: 60px;
+            background-color: rgb(199, 199, 199);
+        }
+
+        .line1 {
+            top: 75px;
+        }
+
+        .line2 {
+            top: 105px;
+        }
+
+        .line3 {
+            top: 135px;
+        }
+
+        .decor-container {
+            position: absolute;
+            width: 400px;
+            height: 530px;
+            top: 270px;
+            left: 800px;
+            border-radius: 20px;
+            background-color: rgb(19, 19, 19);
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        
+        .decor-container2 {
+            position: absolute;
+            left: 800px;
+            top: 10px;
+            border-radius: 12px;
+            background-color: rgb(19, 19, 19);
+            width: 20px;
+            height: 360px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .decor-container3 {
+            position: absolute;
+            left: 1180px;
+            border-radius: 20px;
+            background-color: rgb(19, 19, 19);
+            width: 20px;
+            height: 80px;
+        }
+        
+        .decor-container4 {
+            position: absolute;
+            left: 1168px;
+            background-color: rgb(19, 19, 19);
+            width: 20px;
+            height: 80px;
+            z-index: 1;
+        }
+
+        .decor-container6 {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            top: 0px;
+            left: 800px;
+            border-radius: 20px;
+            backdrop-filter: blur(6px);
+            z-index: 0;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .curved-corner {
+            position: absolute;
+            background-color: rgb(19, 19, 19);
+            width: 50px;
+            height: 50px;
+            left: 800px;
+            top: 245px;
+            mask-image: radial-gradient(circle at 50px -5px, transparent 30px, black 30px);
+            z-index: 1;
+        }
+
+        .location-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            top: 50px;
+            left: 80px;
+            background-color: rgb(226, 226, 226);
+            border-radius: 20px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .location-decor-container {
+            position: absolute;
+            border: 2px solid rgb(219, 219, 219);
+            background-color: rgb(235, 235, 235);
+            border-radius: 20px;
+            width: 260px;
+            height: 160px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .id-input {
+            position: absolute;
+            margin-left: 10px;
+            width: 80px;
+            height: 20px;
+            color: rgb(0, 0, 0);
+            outline: none;
+            border: none;
+            background-color: transparent;
+            font-family: Arial;
+            font-size: 12px;
+        }
+
+        .location-title {
+            position: absolute;
+            color: rgb(218, 214, 214);
+            top: 5px;
+            left: 50px;
+            z-index: 2;
+            font-size: 14px;
+        }
+
+        .address-line, .details-line {
+            position: absolute;
+            height: 2px;
+            background-color: rgb(199, 199, 199);
+        }
+
+        .country {
+            left: 30px;
+            top: 31px;
+            width: 120px;
+        }
+
+        .line4 {
+            left: 40px;
+            top: 60px;
+            width: 220px;
+        }
+
+        .line5 {
+            left: 40px;
+            top: 100px;
+            width: 220px;
+        }
+
+        .line10 {
+            left: 50px;
+            top: 62.5px;
+            width: 300px;
+        }
+
+        .line11 {
+            left: 50px;
+            top: 95px;
+            width: 300px;
+        }
+
+        .line12 {
+            left: 50px;
+            top: 125px;
+            width: 300px;
+        }
+
+        .state {
+            top: 72.5px;
+            left: 30px;
+            width: 100px;
+        }
+
+        .address {
+            top: 115px;
+            left: 30px;
+            width: 200px;
+        }
+
+        .line6 {
+            left: 40px;
+            top: 140px;
+            width: 220px;
+        }
+        
+        .address-two {
+            top: 152.5px;
+            left: 30px;
+            width: 200px;
+        }
+
+        .zip-code {
+            top: 30px;
+            left: 180px;
+            width: 60px;
+        }
+
+        .city {
+            left: 140px;
+            top: 72.5px;
+        }
+
+        .decor-container5 {
+            position: absolute;
+            width: 590px;
+            height: 480px;
+            top: 320px;
+            left: 240px;
+            border-radius: 20px;
+            background-color: rgb(19, 19, 19);
+            z-index: 2;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .notes-title {
+            position: absolute;
+            color: rgb(223, 223, 223);
+            top: 5px;
+            left: 30px;
+            z-index: 3;
+            font-size: 14px;
         }
 
         .details {
             background: transparent;
-            color: white;
-            border-radius: 12px;
+            color: rgb(14, 14, 14);
+            border-radius: 20px;
             border: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-65%, -50%);
-            height: 500px;
-            width: 600px;
+            position: absolute;
+            background-color: rgb(235, 235, 235);
+            left: 40px;
+            top: 60px;
+            height: 340px;
+            width: 460px;
             resize: none; 
             overflow: hidden;
-            font-family: sans-serif;
-            font-size: inherit; 
+            font-size: inherit;
             outline: none;
+            padding-left: 20px; /* Adjust the left padding as needed */
+            padding-top: 20px;  /* Adjust the top padding as needed */
+            padding-right: 20px; /* Adjust the right padding as needed */
+            padding-bottom: 20px; /* Adjust the bottom padding as needed */
         }
 
-        .id-input {
-            position: inherit;
-            width: 270px;
-            height: 30px;
-            color: white;
-            outline: none;
-            border: none;
-            background-color: transparent;
+        .triangle-decor {
+            position: absolute;
+            left: 700px;
+            top: 280px;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 50px solid rgb(19, 19, 19);
+            z-index: 2;
         }
+
+        .information-container1 {
+            position: absolute;
+            width: 780px;
+            height: 325px;
+            border-radius: 20px;
+            background-color: rgb(19, 19, 19);
+            z-index: 2;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .information-title {
+            position: absolute;
+            color: rgb(223, 223, 223);
+            top: 50px;
+            left: 350px;
+            z-index: 3;
+            font-size: 14px;
+        }
+
+        .information-container2 {
+            position: absolute;
+            width: 400px;
+            height: 200px;
+            top: 90px;
+            left: 325px;
+            background-color: rgb(226, 226, 226);
+            border-radius: 20px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .information-decor-container1 {
+            position: absolute;
+            border: 2px solid rgb(219, 219, 219);
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            width: 340px;
+            height: 160px;
+            left: 50%;
+            top: 20px;
+            transform: translate(-50%);
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.08);
+        }
+
 
         .name {
-            top: 10px;
+            left: 40px;
+            top: 40px;
+            width: 260px;
         }
 
         .aliases {
-            top: 40px;
-        }
-
-        .facebook {
+            left: 40px;
             top: 70px;
+            width: 260px;
         }
 
-        .instagram {
+        .email {
+            left: 40px;
             top: 100px;
-        }
-
-        .twitter {
-            top: 130px;
+            width: 150px;
         }
 
         .phone-number {
-            top: 160px;
+            left: 200px;
+            top: 100px;
+            width: 140px;
         }
 
-        .address {
-            top: 190px;
+        .age {
+            left: 40px;
+            top: 145px;
+            width: 35px;
+        }
+        
+        .birthday {
+            left: 75px;
+            top: 145px;
+            width: 120px;
         }
 
         .ip {
+            left: 200px;
+            top: 145px;
+            width: 120px;
+        }
+
+        .line9 {
+            position: absolute;
+            background-color: rgb(223, 223, 223);
+            left: 200px;
+            top: 20px;
+            width: 500px;
+            height: 3px;
+            border-radius: 4px;
+            z-index: 5;
+        }
+
+        @font-face {
+            font-family: 'YouMurderer';
+            src: url('fonts/youmurdererbb_reg-webfont.woff2') format('woff2'),
+            url('fonts/youmurdererbb_reg-webfont.woff') format('woff');
+            font-weight: normal;
+            font-size: normal;
+        }
+
+        .sin-title {
+            font-family: 'YouMurderer';
+            font-size: 60px;
+            font-weight: 10;
+            color: rgb(207, 207, 207);
+            position: absolute;
+            left: 95px;
+            top: 60px;
+            cursor: default;
+        }
+
+        .sins {
+            background: transparent;
+            color: rgb(207, 207, 207);
+            border-radius: 20px;
+            border: none;
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            height: 120px;
+            width: 200px;
+            resize: none; 
+            overflow: hidden;
+            font-family: "YouMurderer";
+            font-size: 40px;
+            outline: none;
+            padding-left: 20px; /* Adjust the left padding as needed */
+            padding-top: 20px;  /* Adjust the top padding as needed */
+            padding-right: 20px; /* Adjust the right padding as needed */
+            padding-bottom: 20px; /* Adjust the bottom padding as needed */
+        }
+
+        .decor-container7 {
+            position: absolute;
+            width: 200px;
+            height: 160px;
+            top: 280px;
+            left: -20px;
+            border-radius: 20px;
+            background-color: rgb(231, 231, 231);
+            z-index: 4;
+        }
+
+        .social-media-container {
+            position: absolute;
+            width: 260px;
+            height: 500px;
+            top: 300px;
+            border-radius: 20px;
+            background-color: rgba(14, 14, 14, 0.4);
+            backdrop-filter: blur(2px);
+            z-index: 3;
+        }
+
+        .social-media-title {
+            position: absolute;
+            color: white;
+            top: 150px;
+            left: 20px;
+            font-size: 14px;
+        }
+        
+        .instagram {
+            color: white;
+            width: 200px;
+            top: 180px;
+        }
+
+        .facebook {
+            color: white;
+            width: 200px;
+            top: 200px;
+        }
+
+        .twitter {
+            color: white;
+            width: 200px;
             top: 220px;
         }
 
-    </style>
-</head>
-<body>
-    <a class="back-button" href="index.html"><</a>
-    <div class="subject" id="subject">Subject</div>
-    <div class="container">
-        <div class="information-container">
-            <input class="name id-input" spellcheck="false" value="Name: "></input>
-            <input class="aliases id-input" spellcheck="false" value="Aliases: "></input>
-            <input class="facebook id-input" spellcheck="false" value="Facebook: "></input>
-            <input class="instagram id-input" spellcheck="false" value="Instagram: "></input>
-            <input class="twitter id-input" spellcheck="false" value="Twitter: "></input>
-            <input class="phone-number id-input" spellcheck="false" value="Phone Number: "></input>
-            <input class="address id-input" spellcheck="false" value="Address: "></input>
-            <input class="ip id-input" spellcheck="false" value="IP Address: "></input>
-        </div>
-        <textarea rows="4" cols="40" class="details" spellcheck="false"></textarea>
-    </div>
-    <script>
-        // if logged in
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('loggedIn='))) {
-            var loggedIn = document.cookie.replace(/(?:(?:^|.*;\s*)loggedIn\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-            if (loggedIn === "true") {
-                // user is logged in, show page
-            } else {
-                // user is not logged in, redirect to login
-                window.location.href = "login.html";
-            }
-        } else {
-            // loggedIn cookie does not exist; redirect to login 
-            window.location.href = "login.html";
+        .youtube {
+            color: white;
+            width: 200px;
+            top: 240px;
         }
 
+        .telegram {
+            color: white;
+            width: 200px;
+            top: 260px;
+        }
+        
+        .other1 {
+            color: white;
+            width: 200px;
+            top: 280px;
+        }
+        .other2 {
+            color: white;
+            width: 200px;
+            top: 300px;
+        }
+
+        .threat-title {
+            position: absolute;
+            color: white;
+            top: 340px;
+            left: 160px;
+            font-size: 14px;
+        }
+        
+        .slider-container {
+            position: absolute;
+            top: 375px;
+            left: 5px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 200px;
+            height: 3px;
+            background: #dddddd00;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            background: #8B0000;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #e4e4e400;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        
+        .blur-button {
+            position: absolute;
+            z-index: 5;
+            background-color: rgb(40, 40, 40);
+            color: rgb(235, 235, 235);
+            border: 1px black solid;
+            visibility: hidden;
+        }
+        
+    </style>
+</head>
+
+<!--https://www.w3schools.com/css/css3_masking.asp-->
+<body>
+    <a class="back-button" href="index.html"><</a>
+    <div class="background-darken"></div>
+    <div class="full-container">
+        <div class="square-corner"></div>
+        <h2 class="subject" id="subject">Subject</h2>
+        <div class="decor-container7" id="decor-container7"></div>
+        <div class="social-media-container" id="social-media-container">
+            <h2 class="social-media-title">Media</h2>
+            <input class="instagram id-input" spellcheck="false" placeholder="Instagram"></input>
+            <input class="facebook id-input" spellcheck="false" placeholder="Facebook"></input>
+            <input class="twitter id-input" spellcheck="false" placeholder="Twitter"></input>
+            <input class="youtube id-input" spellcheck="false" placeholder="Youtube"></input>
+            <input class="telegram id-input" spellcheck="false" placeholder="Telegram"></input>
+            <input class="other1 id-input" spellcheck="false" placeholder="Other"></input>
+            <input class="other2 id-input" spellcheck="false" placeholder="Other"></input>
+            <h2 class="threat-title">Threat</h2>
+            <div class="slider-container">
+                <input type="range" class="slider id-input" min="0" max="100" value="0" oninput="updateValue(this)">
+                <div class="value-display" id="valueDisplay"></div>
+            </div>
+        </div>
+        <div class="information-container1" id="information-container1">
+            <a class="sin-title" id="sin-title">Sins</a>
+            <textarea rows="4" cols="30" class="sins" spellcheck="false"></textarea>
+            <div class="line9"></div>
+            <h2 class="information-title">Subject Details</h2>
+            <div class="information-container2">
+                <div class="information-decor-container1"></div>
+                <div class="information-decor-container2"></div>
+                <div class="information-decor-container3"></div>
+                <input class="name id-input" spellcheck="false" placeholder="Name"></input>
+                <div class="line10 details-line"></div>
+                <input class="aliases id-input" spellcheck="false" placeholder="Aliases"></input>
+                <div class="line11 details-line"></div>
+                <input class="email id-input" spellcheck="false" placeholder="Email"></input>
+                <input class="phone-number id-input" spellcheck="false" placeholder="Phone Number"></input>
+                <div class="line12 details-line"></div>
+                <input class="age id-input" spellcheck="false" placeholder="Age"></input>
+                <input class="birthday id-input" spellcheck="false" placeholder="Birthday"></input>
+                <input class="ip id-input" spellcheck="false" placeholder="IP"></input>
+            </div>
+        </div>
+        <div class="decor-container">
+            <h2 class="location-title">Subject Location</h2>
+            <div class="location-container">
+                <div class="location-decor-container"></div>
+                <div class="line4 address-line"></div>
+                <input class="country id-input" spellcheck="false" placeholder="Country"></input>
+                <input class="zip-code id-input" spellcheck="false" placeholder="Zip Code"></input>
+                <div class="line6 address-line"></div>
+                <input class="state id-input" spellcheck="false" placeholder="State"></input>
+                <input class="city id-input" spellcheck="false" placeholder="City"></input>
+                <div class="line7 address-line"></div>
+                <input class="address id-input" spellcheck="false" placeholder="Address 1"></input>
+                <div class="line5 address-line"></div>
+                <input class="address-two id-input" spellcheck="false" placeholder="Address 2"></input>
+            </div>
+        </div>
+        <div class="decor-container2"></div>
+        <div class="decor-container3"></div>
+        <div class="decor-container4"></div>
+        <div class="decor-container5">
+            <textarea rows="4" cols="40" class="details" spellcheck="false" placeholder="Notes"></textarea>
+            <h2 class="notes-title">Annotation</h2>
+        </div>
+        <div class="decor-container6"></div>
+        <div class="triangle-decor"></div>
+        
+        <div class="curved-corner">
+            <div class="corner"></div>
+        </div>
+        <div class="evidence-container">
+            <h2 class="evidence">Documents</h2>
+            <h2 class="identity-evidence">Identity</h2>
+            <div class="line1 documents-line"></div>
+            <div class="identity-folder-icon"></div>
+            <div id="identity-container" class="identity-container">
+                <h2 class="identity-title">Proof of Identification</h2>
+                <div id="imageContainer1" class="image-container" onclick="enlargePhoto('imageContainer1')">
+                    <button class="blur-button" onclick="blurImage('imageContainer1')">Blur Image</button>
+                    <input type="file" id="fileInput1" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer1')">
+                    <label class="file-upload" for="fileInput1"></label>
+                </div>
+                <div id="imageContainer2" class="image-container" onclick="enlargePhoto('imageContainer2')">
+                    <button class="blur-button" onclick="blurImage('imageContainer2')">Blur Image</button>
+                    <input type="file" id="fileInput2" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer2')">
+                    <label class="file-upload" for="fileInput2"></label>
+                </div>
+                <div id="imageContainer3" class="image-container" onclick="enlargePhoto('imageContainer3')">
+                    <button class="blur-button" onclick="blurImage('imageContainer3')">Blur Image</button>
+                    <input type="file" id="fileInput3" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer3')">
+                    <label class="file-upload" for="fileInput3"></label>
+                </div>
+                <div id="imageContainer4" class="image-container" onclick="enlargePhoto('imageContainer4')">
+                    <button class="blur-button" onclick="blurImage('imageContainer4')">Blur Image</button>
+                    <input type="file" id="fileInput4" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer4')">
+                    <label class="file-upload" for="fileInput4"></label>
+                </div>
+                <div id="imageContainer5" class="image-container" onclick="enlargePhoto('imageContainer5')">
+                    <button class="blur-button" onclick="blurImage('imageContainer5')">Blur Image</button>
+                    <input type="file" id="fileInput5" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer5')">
+                    <label class="file-upload" for="fileInput5"></label>
+                </div>
+                <div id="imageContainer6" class="image-container" onclick="enlargePhoto('imageContainer6')">
+                    <button class="blur-button" onclick="blurImage('imageContainer6')">Blur Image</button>
+                    <input type="file" id="fileInput6" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer6')">
+                    <label class="file-upload" for="fileInput6"></label>
+                </div>
+                <div id="imageContainer7" class="image-container" onclick="enlargePhoto('imageContainer7')">
+                    <button class="blur-button" onclick="blurImage('imageContainer7')">Blur Image</button>
+                    <input type="file" id="fileInput7" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer7')">
+                    <label class="file-upload" for="fileInput7"></label>
+                </div>
+                <div id="imageContainer8" class="image-container" onclick="enlargePhoto('imageContainer8')">
+                    <button class="blur-button" onclick="blurImage('imageContainer8')">Blur Image</button>
+                    <input type="file" id="fileInput8" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer8')">
+                    <label class="file-upload" for="fileInput8"></label>
+                </div>
+                <div id="imageContainer9" class="image-container" onclick="enlargePhoto('imageContainer9')">
+                    <button class="blur-button" onclick="blurImage('imageContainer9')">Blur Image</button>
+                    <input type="file" id="fileInput9" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer9')">
+                    <label class="file-upload" for="fileInput9"></label>
+                </div>
+                <div id="imageContainer10" class="image-container" onclick="enlargePhoto('imageContainer10')">
+                    <button class="blur-button" onclick="blurImage('imageContainer10')">Blur Image</button>
+                    <input type="file" id="fileInput10" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer10')">
+                    <label class="file-upload" for="fileInput10"></label>
+                </div>
+            </div>
+            <h2 class="chat-evidence">Chat</h2>
+            <div class="line2 documents-line"></div>
+            <div class="chat-folder-icon"></div>
+            <div id="chat-container" class="chat-container">
+                <h2 class="chat-log-title">Subject Chat Logs</h2>
+                <div id="imageContainer11" class="image-container" onclick="enlargePhoto('imageContainer11')">
+                    <button class="blur-button" onclick="blurImage('imageContainer11')">Blur Image</button>
+                    <input type="file" id="fileInput11" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer11')">
+                    <label class="file-upload" for="fileInput11"></label>
+                </div>
+                <div id="imageContainer12" class="image-container" onclick="enlargePhoto('imageContainer12')">
+                    <button class="blur-button" onclick="blurImage('imageContainer12')">Blur Image</button>
+                    <input type="file" id="fileInput12" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer12')">
+                    <label class="file-upload" for="fileInput12"></label>
+                </div>
+                <div id="imageContainer13" class="image-container" onclick="enlargePhoto('imageContainer13')">
+                    <button class="blur-button" onclick="blurImage('imageContainer13')">Blur Image</button>
+                    <input type="file" id="fileInput13" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer13')">
+                    <label class="file-upload" for="fileInput13"></label>
+                </div>
+                <div id="imageContainer14" class="image-container" onclick="enlargePhoto('imageContainer14')">
+                    <button class="blur-button" onclick="blurImage('imageContainer14')">Blur Image</button>
+                    <input type="file" id="fileInput14" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer14')">
+                    <label class="file-upload" for="fileInput14"></label>
+                </div>
+                <div id="imageContainer15" class="image-container" onclick="enlargePhoto('imageContainer15')">
+                    <button class="blur-button" onclick="blurImage('imageContainer15')">Blur Image</button>
+                    <input type="file" id="fileInput15" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer15')">
+                    <label class="file-upload" for="fileInput15"></label>
+                </div>
+                <div id="imageContainer16" class="image-container" onclick="enlargePhoto('imageContainer16')">
+                    <button class="blur-button" onclick="blurImage('imageContainer16')">Blur Image</button>
+                    <input type="file" id="fileInput16" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer16')">
+                    <label class="file-upload" for="fileInput16"></label>
+                </div>
+                <div id="imageContainer17" class="image-container" onclick="enlargePhoto('imageContainer17')">
+                    <button class="blur-button" onclick="blurImage('imageContainer17')">Blur Image</button>
+                    <input type="file" id="fileInput17" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer17')">
+                    <label class="file-upload" for="fileInput17"></label>
+                </div>
+                <div id="imageContainer18" class="image-container" onclick="enlargePhoto('imageContainer18')">
+                    <button class="blur-button" onclick="blurImage('imageContainer18')">Blur Image</button>
+                    <input type="file" id="fileInput18" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer18')">
+                    <label class="file-upload" for="fileInput18"></label>
+                </div>
+                <div id="imageContainer19" class="image-container" onclick="enlargePhoto('imageContainer19')">
+                    <button class="blur-button" onclick="blurImage('imageContainer19')">Blur Image</button>
+                    <input type="file" id="fileInput19" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer19')">
+                    <label class="file-upload" for="fileInput19"></label>
+                </div>
+                <div id="imageContainer20" class="image-container" onclick="enlargePhoto('imageContainer20')">
+                    <button class="blur-button" onclick="blurImage('imageContainer20')">Blur Image</button>
+                    <input type="file" id="fileInput20" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer20')">
+                    <label class="file-upload" for="fileInput20"></label>
+                </div>
+            </div>
+            <h2 class="location-evidence">Location</h2>
+            <div class="line3 documents-line"></div>
+            <div class="location-folder-icon"></div>
+            <div id="location-menu-container" class="location-menu-container">
+                <h2 class="location-evidence-title">Evidence of Subject Location</h2>
+                <div id="imageContainer21" class="image-container" onclick="enlargePhoto('imageContainer21')">
+                    <button class="blur-button" onclick="blurImage('imageContainer21')">Blur Image</button>
+                    <input type="file" id="fileInput21" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer21')">
+                    <label class="file-upload" for="fileInput21"></label>
+                </div>
+                <div id="imageContainer22" class="image-container" onclick="enlargePhoto('imageContainer22')">
+                    <button class="blur-button" onclick="blurImage('imageContainer22')">Blur Image</button>
+                    <input type="file" id="fileInput22" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer22')">
+                    <label class="file-upload" for="fileInput22"></label>
+                </div>
+                <div id="imageContainer23" class="image-container" onclick="enlargePhoto('imageContainer23')">
+                    <button class="blur-button" onclick="blurImage('imageContainer23')">Blur Image</button>
+                    <input type="file" id="fileInput23" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer23')">
+                    <label class="file-upload" for="fileInput23"></label>
+                </div>
+                <div id="imageContainer24" class="image-container" onclick="enlargePhoto('imageContainer24')">
+                    <button class="blur-button" onclick="blurImage('imageContainer24')">Blur Image</button>
+                    <input type="file" id="fileInput24" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer24')">
+                    <label class="file-upload" for="fileInput24"></label>
+                </div>
+                <div id="imageContainer25" class="image-container" onclick="enlargePhoto('imageContainer25')">
+                    <button class="blur-button" onclick="blurImage('imageContainer25')">Blur Image</button>
+                    <input type="file" id="fileInput25" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer25')">
+                    <label class="file-upload" for="fileInput25"></label>
+                </div>
+                <div id="imageContainer26" class="image-container" onclick="enlargePhoto('imageContainer26')">
+                    <button class="blur-button" onclick="blurImage('imageContainer26')">Blur Image</button>
+                    <input type="file" id="fileInput26" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer26')">
+                    <label class="file-upload" for="fileInput26"></label>
+                </div>
+                <div id="imageContainer27" class="image-container" onclick="enlargePhoto('imageContainer27')">
+                    <button class="blur-button" onclick="blurImage('imageContainer27')">Blur Image</button>
+                    <input type="file" id="fileInput27" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer27')">
+                    <label class="file-upload" for="fileInput27"></label>
+                </div>
+                <div id="imageContainer28" class="image-container" onclick="enlargePhoto('imageContainer28')">
+                    <button class="blur-button" onclick="blurImage('imageContainer28')">Blur Image</button>
+                    <input type="file" id="fileInput28" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer28')">
+                    <label class="file-upload" for="fileInput28"></label>
+                </div>
+                <div id="imageContainer29" class="image-container" onclick="enlargePhoto('imageContainer29')">
+                    <button class="blur-button" onclick="blurImage('imageContainer29')">Blur Image</button>
+                    <input type="file" id="fileInput29" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer29')">
+                    <label class="file-upload" for="fileInput29"></label>
+                </div>
+                <div id="imageContainer30" class="image-container" onclick="enlargePhoto('imageContainer30')">
+                    <button class="blur-button" onclick="blurImage('imageContainer30')">Blur Image</button>
+                    <input type="file" id="fileInput30" style="display: none;" accept=".png, .jpg, .jpeg, .webp" onchange="displayImage(event, 'imageContainer30')">
+                    <label class="file-upload" for="fileInput30"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let darkmode = true;
+
+        function darkMode() {
+            const notes_textarea = getComputedStyle(textarea);
+            const decor_container1 = document.querySelector('.information-decor-container1');
+            const decor_container2 = document.querySelector('.location-decor-container');
+            const decor_container3 = document.querySelector('.decor-container7');
+            const information_container = document.querySelector('.information-container2');
+            const location_container = document.querySelector('.location-container');
+            const identity_container = document.querySelector('.identity-container');
+            const identity_title = document.querySelector('.identity-title');
+            const chat_container = document.querySelector('.chat-container');
+            const chat_title = document.querySelector('.chat-log-title');
+            const location_evidence_container = document.querySelector('.location-menu-container');
+            const location_title = document.querySelector('.location-evidence-title');
+            const details_lines = document.querySelectorAll('.details-line');
+            const address_lines = document.querySelectorAll('.address-line');
+            const documents_lines = document.querySelectorAll('.documents-line');
+            const image_containers = document.querySelectorAll('.image-container');
+            const line9 = document.querySelector('.line9');
+            if (notes_textarea.backgroundColor == 'rgb(235, 235, 235)') {
+                textarea.style.backgroundColor = 'rgb(40, 40, 40)';
+                textarea.style.color = 'rgb(200, 200, 200)';
+                decor_container1.style.backgroundColor = 'rgb(40, 40, 40)';
+                decor_container1.style.borderColor = 'rgb(40, 40, 40)';
+                decor_container2.style.backgroundColor = 'rgb(40, 40, 40)';
+                decor_container2.style.borderColor = 'rgb(40, 40, 40)';
+                decor_container3.style.backgroundColor = 'rgb(40, 40, 40)';
+                information_container.style.backgroundColor = 'rgb(30, 30, 30)';
+                location_container.style.backgroundColor = 'rgb(30, 30, 30)';
+                identity_container.style.backgroundColor = 'rgb(30, 30, 30)';
+                identity_title.style.color = 'rgb(200, 200, 200)';
+                chat_container.style.backgroundColor = 'rgb(30, 30, 30)';
+                chat_title.style.color = 'rgb(200, 200, 200)';
+                location_evidence_container.style.backgroundColor = 'rgb(30, 30, 30)';
+                location_title.style.color = 'rgb(200, 200, 200)';
+                line9.style.backgroundColor = 'rgb(60, 60, 60)';
+                inputs.forEach(input => {
+                    input.style.color = 'rgb(200, 200, 200)';//location-menu-container chat-container
+                });
+                details_lines.forEach(details_line => {
+                    details_line.style.backgroundColor = 'rgb(110, 110, 110)';
+                });
+                address_lines.forEach(address_line => {
+                    address_line.style.backgroundColor = 'rgb(110, 110, 110)';
+                });
+                documents_lines.forEach(documents_line => {
+                    documents_line.style.backgroundColor = 'rgb(110, 110, 110)';
+                });
+                image_containers.forEach(image_container => {
+                    image_container.style.backgroundColor = 'rgb(40, 40, 40)';
+                    image_container.style.borderColor = 'rgb(40, 40, 40)';
+                });
+                darkmode=true;
+            } else {
+                textarea.style.backgroundColor = 'rgb(235, 235, 235)';
+                textarea.style.color = 'rgb(14, 14, 14)';
+                decor_container1.style.backgroundColor = 'rgb(235, 235, 235)';
+                decor_container1.style.borderColor = 'rgb(219, 219, 219)';
+                decor_container2.style.backgroundColor = 'rgb(235, 235, 235)';
+                decor_container2.style.borderColor = 'rgb(219, 219, 219)';
+                decor_container3.style.backgroundColor = 'rgb(235, 235, 235)';
+                information_container.style.backgroundColor = 'rgb(226, 226, 226)';
+                location_container.style.backgroundColor = 'rgb(226, 226, 226)';
+                identity_container.style.backgroundColor = 'rgb(221, 221, 221)';
+                identity_title.style.color = 'black';
+                chat_container.style.backgroundColor = 'rgb(221, 221, 221)';
+                chat_title.style.color = 'black';
+                location_evidence_container.style.backgroundColor = 'rgb(221, 221, 221)';
+                location_title.style.color = 'black';
+                line9.style.backgroundColor = 'rgb(223, 223, 223)';
+                inputs.forEach(input => {
+                    input.style.color = 'rgb(14, 14, 14)';
+                });
+                details_lines.forEach(details_line => {
+                    details_line.style.backgroundColor = 'rgb(199, 199, 199)';
+                });
+                address_lines.forEach(address_line => {
+                    address_line.style.backgroundColor = 'rgb(199, 199, 199)';
+                });
+                documents_lines.forEach(documents_line => {
+                    documents_line.style.backgroundColor = 'rgb(199, 199, 199)';
+                });
+                image_containers.forEach(image_container => {
+                    image_container.style.backgroundColor = 'rgb(240, 240, 240)';
+                    image_container.style.borderColor = 'rgb(204, 204, 204)';
+                });
+                darkmode=false;
+            }
+            localStorage.setItem('darkmode', darkmode);
+        }
+
+        const sins_title = document.querySelector(".sin-title");
+        sins_title.addEventListener("click", darkMode);
+    
         // selected subject page
         const selectedSubject = localStorage.getItem('selectedSubject');
         let subjectTitle = document.getElementById("subject");
-        subjectTitle.innerHTML="Subject " + selectedSubject;
+        subjectTitle.innerHTML=selectedSubject;
 
          // Get all input fields and the textarea
         const inputs = document.querySelectorAll('.id-input');
         const textarea = document.querySelector('.details');
+        const sins = document.querySelector('.sins');
+        /*
+        function updateValue(slider) {
+            const value = slider.value;
+            document.getElementById('valueDisplay').textContent = value;
+            updateSliderBackground(slider);
+        }
 
+        function updateSliderBackground(slider) {
+            const value = slider.value;
+            const percentage = (value - slider.min) / (slider.max - slider.min) * 100;
+            slider.style.background = `linear-gradient(to right, #8B0000 ${percentage}%, #232323 ${percentage}%)`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.getElementById('slider');
+            updateSliderBackground(slider);
+        });*/
+        
         // Attach event listeners to all input fields and the textarea
         inputs.forEach(input => {
             input.addEventListener('input', saveToJson);
         });
-        textarea.addEventListener('input', saveToJson);
+        textarea.addEventListener('change', saveToJson);
+        sins.addEventListener('change', saveToJson);
 
+        // open folders
+
+        const identity_folder = document.querySelector('.identity-folder-icon');
+        const chat_folder = document.querySelector('.chat-folder-icon');
+        const location_folder = document.querySelector('.location-folder-icon');
+
+        let containers = [
+            { element: document.querySelector('#identity-container'), isOpen: false },
+            { element: document.querySelector('#chat-container'), isOpen: false },
+            { element: document.querySelector('#location-menu-container'), isOpen: false }
+        ];
+
+        function toggleContainer(clickedIndex) {
+            containers.forEach((container, index) => {
+                if (index === clickedIndex) {
+                    container.isOpen = !container.isOpen;
+                    container.element.style.visibility = container.isOpen ? 'visible' : 'hidden';
+                    console.log(`${container.isOpen ? 'Opening' : 'Closing'} ${container.element.id} container`);
+             } else {
+                    if (container.isOpen) {
+                        container.element.style.visibility = 'hidden';
+                        console.log(`Closing ${container.element.id} container`);
+                        container.isOpen = false;
+                    }
+            }
+            });
+        }
+
+        identity_folder.addEventListener('click', function() {
+            toggleContainer(0);
+        });
+
+        chat_folder.addEventListener('click', function() {
+            toggleContainer(1);
+        });
+
+        location_folder.addEventListener('click', function() {
+            toggleContainer(2);
+        });
+
+        //////////////////////// identity ////////////////////////        
+        function displayImage(event, containerId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const imageContainer = document.getElementById(containerId);
+                    imageContainer.innerHTML = ''; // Clear any existing content
+                    const imageData = reader.result.split(',')[1]; // Remove the "data:image/png;base64," part
+                    saveImageData(containerId, imageData); // Save image data to localStorage
+                    renderImage(containerId, imageData); // Render the image on the page
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function enlargePhoto(containerId) {
+            const imageContainer = document.getElementById(containerId);
+            const subject_element = document.getElementById('subject');
+            const media_container = document.getElementById('social-media-container');
+            const decor_container = document.getElementById('decor-container7');
+            const info_container = document.getElementById('information-container1');
+            var blurButton = document.querySelector('#' + containerId + ' .blur-button');
+            // Check if we have already stored the original size and position
+            if (!imageContainer.dataset.originalWidth) {
+                // Store the original size and position
+                imageContainer.dataset.originalWidth = imageContainer.offsetWidth-4;
+                imageContainer.dataset.originalHeight = imageContainer.offsetHeight-4;
+                imageContainer.dataset.originalLeft = imageContainer.style.left;
+                imageContainer.dataset.originalTop = imageContainer.style.top;
+            }
+            const currentWidth = imageContainer.offsetWidth;
+            if (currentWidth < 200) {
+                imageContainer.style.width = '1000px'; // Enlarge the container
+                imageContainer.style.height = '700px'; // Adjust height accordingly
+                imageContainer.style.left = '-1100px'; // Adjust position accordingly
+                imageContainer.style.top = '-100px'; // Adjust position accordingly
+                imageContainer.style.zIndex = '103';
+                imageContainer.style.backgroundColor = 'black';
+                imageContainer.style.borderColor = 'black';
+                subject_element.style.zIndex = '2';
+                media_container.style.zIndex = '1';
+                decor_container.style.zIndex = '2';
+                info_container.style.zIndex = '0';
+                if (blurButton) {
+                    blurButton.style.visibility = blurButton.style.visibility === 'visible' ? 'hidden' : 'visible';
+                }
+            } else {
+                // Restore the original size and position
+                imageContainer.style.width = imageContainer.dataset.originalWidth + 'px';
+                imageContainer.style.height = imageContainer.dataset.originalHeight + 'px';
+                imageContainer.style.left = imageContainer.dataset.originalLeft;
+                imageContainer.style.top = imageContainer.dataset.originalTop;
+                imageContainer.style.zIndex = '101';
+                subject_element.style.zIndex = '3';
+                media_container.style.zIndex = '2';
+                decor_container.style.zIndex = '3';
+                info_container.style.zIndex = '1';
+                blurButton.style.visibility = 'hidden';
+                if (darkmode == false) {
+                    imageContainer.style.borderColor = '#ccc';
+                    imageContainer.style.backgroundColor = '#f0f0f0';
+                } else {
+                    imageContainer.style.borderColor = 'rgb(40, 40, 40)';
+                    imageContainer.style.backgroundColor = 'rgb(40, 40, 40)';
+                }
+            }
+        }
+
+        function openImageInNewTab(containerId) {
+            const imageContainer = document.getElementById(containerId);
+            const imageUrl = imageContainer.style.backgroundImage.replace('url("', '').replace('")', '');
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function saveImageData(containerId, imageData) {
+            const key = `imageData_${selectedSubject}_${containerId}`;
+            localStorage.setItem(key, imageData);
+        }
         // Function to save JSON to local storage
         function saveToJson() {
             // Get user inputs
             const name = document.querySelector('.name').value;
             const aliases = document.querySelector('.aliases').value;
-            const facebook = document.querySelector('.facebook').value;
-            const instagram = document.querySelector('.instagram').value;
-            const twitter = document.querySelector('.twitter').value;
+            const age = document.querySelector('.age').value;
             const phoneNumber = document.querySelector('.phone-number').value;
+            const country = document.querySelector('.country').value;
+            const zip = document.querySelector('.zip-code').value;
+            const state = document.querySelector('.state').value;
+            const city = document.querySelector('.city').value;
             const address = document.querySelector('.address').value;
+            const address2 = document.querySelector('.address-two').value;
+            const email = document.querySelector('.email').value;
             const details = document.querySelector('.details').value;
             const ip = document.querySelector('.ip').value;
+            const birthday = document.querySelector('.birthday').value;
+            const sins = document.querySelector('.sins').value;
+            const instagram = document.querySelector('.instagram').value;
+            const facebook = document.querySelector('.facebook').value;
+            const twitter = document.querySelector('.twitter').value;
+            const youtube = document.querySelector('.youtube').value;
+            const telegram = document.querySelector('.telegram').value;
+            const other1 = document.querySelector('.other1').value;
+            const other2 = document.querySelector('.other2').value;
+            const darkModeValue = darkmode ? 'true' : 'false';
+            //const slider = document.getElementById('slider');
 
             // Create JSON object
             const jsonObject = {
                 "name": name,
                 "aliases": aliases,
-                "facebook": facebook,
-                "instagram": instagram,
-                "twitter": twitter,
+                "age": age,
                 "phone_number": phoneNumber,
+                "country": country,
+                "zip": zip,
+                "state": state,
+                "city": city,
                 "address": address,
+                "address2": address2,
                 "ip": ip,
-                "details": details
+                "email": email,
+                "details": details,
+                "birthday": birthday,
+                "sins": sins,
+                "instagram": instagram,
+                "facebook": facebook,
+                "twitter": twitter,
+                "youtube": youtube,
+                "telegram": telegram,
+                "other1": other1,
+                "other2": other2,
+                "darkmode" : darkModeValue
+                //"slider": slider
             };
-
-            // Convert JSON object to string
+             // Convert JSON object to string
             const jsonString = JSON.stringify(jsonObject);
 
             // Save JSON string to local storage
             localStorage.setItem(selectedSubject, jsonString);
         }
+        
+        function renderImage(containerId, imageData) {
+            const image = new Image();
+            image.src = `data:image/jpeg;base64,${imageData}`;
+            document.getElementById(containerId).appendChild(image);
+        }
+
+        function blurImage(containerId) {
+            var container = document.getElementById(containerId);
+            var image = container.querySelector('img');
+            if (image) {
+                if (image.style.filter) {
+                    image.style.filter = '';
+                    localStorage.removeItem(containerId + '_blur'); // Store the blur state in local storage
+                } else {
+                    image.style.filter = 'blur(4px)'; // Adjust blur value as needed
+                    localStorage.setItem(containerId + '_blur', 'blurred'); // Store the blur state in local storage
+                }
+            } else {
+                console.log("Image not found in container:", containerId);
+            }
+        }
 
         // Event listener to trigger saveToJson() function on input change
-        document.querySelectorAll('.id-input, .details').forEach(input => {
+        document.querySelectorAll('.id-input, .details, .sins').forEach(input => {
             input.addEventListener('input', saveToJson);
         });
-
         // Load saved data from local storage on page load
         window.addEventListener('load', function() {
-            const savedData = localStorage.getItem(selectedSubject);
-            if (savedData) {
-                const jsonObject = JSON.parse(savedData);
-                document.querySelector('.name').value = jsonObject.name;
-                document.querySelector('.aliases').value = jsonObject.aliases;
-                document.querySelector('.facebook').value = jsonObject.facebook;
-                document.querySelector('.instagram').value = jsonObject.instagram;
-                document.querySelector('.twitter').value = jsonObject.twitter;
-                document.querySelector('.phone-number').value = jsonObject.phone_number;
-                document.querySelector('.address').value = jsonObject.address;
-                document.querySelector('.ip').value = jsonObject.ip;
-                document.querySelector('.details').value = jsonObject.details;
+            const imageContainers = [];
+            for (let i = 1; i <=30; i++) {
+                imageContainers.push(`imageContainer${i}`);
+            }
+            imageContainers.forEach(containerId => {
+                const key = `imageData_${selectedSubject}_${containerId}`;
+                const savedData = localStorage.getItem(key);
+                if (savedData) {
+                    renderImage(containerId, savedData);
+                }
+            });
+            const savedSubjectData = localStorage.getItem(selectedSubject);
+            if (savedSubjectData) {
+                try {
+                    const jsonObject = JSON.parse(savedSubjectData);
+                    document.querySelector('.name').value = jsonObject.name || '';
+                    document.querySelector('.aliases').value = jsonObject.aliases || '';
+                    document.querySelector('.age').value = jsonObject.age || '';
+                    document.querySelector('.phone-number').value = jsonObject.phone_number || '';
+                    document.querySelector('.country').value = jsonObject.country || '';
+                    document.querySelector('.zip-code').value = jsonObject.zip || '';
+                    document.querySelector('.state').value = jsonObject.state || '';
+                    document.querySelector('.city').value = jsonObject.city || '';
+                    document.querySelector('.address').value = jsonObject.address || '';
+                    document.querySelector('.address-two').value = jsonObject.address2 || '';
+                    document.querySelector('.ip').value = jsonObject.ip || '';
+                    document.querySelector('.email').value = jsonObject.email || '';
+                    document.querySelector('.details').value = jsonObject.details || '';
+                    document.querySelector('.birthday').value = jsonObject.birthday || '';
+                    document.querySelector('.sins').value = jsonObject.sins || '';
+                    document.querySelector('.instagram').value = jsonObject.instagram || '';
+                    document.querySelector('.facebook').value = jsonObject.facebook || '';
+                    document.querySelector('.twitter').value = jsonObject.twitter || '';
+                    document.querySelector('.youtube').value = jsonObject.youtube || '';
+                    document.querySelector('.telegram').value = jsonObject.telegram || '';
+                    document.querySelector('.other1').value = jsonObject.other1 || '';
+                    document.querySelector('.other2').value = jsonObject.other2 || '';
+                    function applyBlurState() {
+                        var imageContainers = document.querySelectorAll('.image-container');
+                        imageContainers.forEach(function(container) {
+                            var containerId = container.id;
+                            var blurState = localStorage.getItem(containerId + '_blur');
+                            var image = container.querySelector('img');
+                            if (blurState === 'blurred' && image) {
+                                image.style.filter = 'blur(4px)'; // Apply blur effect
+                            }
+                        });
+                    }
+                    
+                    // Call the function to apply blur state when the page loads
+                    applyBlurState();
+                } catch (error) {
+                    console.error('Error parsing JSON data:', error);
+                }
+            }
+            const savedDarkmode = localStorage.getItem('darkmode');
+            if (savedDarkmode) {
+                // Parse darkmode value from string to boolean
+                darkmode = savedDarkmode === 'true';
+                // Apply dark mode if saved value is true
+                if (darkmode) {
+                    darkMode();
+                }
             }
         });
-        
     </script>
 </body>
 </html>

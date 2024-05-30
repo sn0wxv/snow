@@ -34,6 +34,11 @@ body {
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255);
     backdrop-filter: blur(4px);
+    z-index: 3;
+}
+
+.form_input:focus {
+    outline: none;
 }
 
 #password {
@@ -52,7 +57,7 @@ body {
     position: fixed;
     transform: translate(-50%, -50%);
     border: 15px 150px;
-    padding: 100% 100%;    
+    padding: 100% 100%;
 }
 
 #start_button {
@@ -72,77 +77,12 @@ body {
     border-color: rgb(255, 255, 255) !important;
 }
 
-.menu {
-    visibility: hidden;
-}
-
 #background{
     /*on click, change menu background to transition below*/
     backdrop-filter: blur(2px);
     -webkit-transition: backdrop-filter 100ms linear;
     -ms-transition: backdrop-filter 100ms linear;
     transition: backdrop-filter 100ms linear;
-}
-
-.menu_text {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    z-index: 5;
-
-    font-family: monospace;
-    font-size: 5dvb;
-    text-decoration: none;
-    color: rgb(236, 236, 236);
-    opacity: 100%;
-    cursor: pointer;
-}
-
-.menu_text:hover {
-    color: rgb(146, 26, 26) !important;
-}
-
-#menu_box {
-    border-radius: 12px;
-    background-color: white;
-    opacity: 10%;
-    backdrop-filter: blur(2px);
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 100% 150px;
-    z-index: 4;
-}
-
-#projects {
-    margin: -150px 0px;
-    z-index: 5;
-}
-
-#b {
-    margin: -50px 0px;
-    z-index: 5;
-}
-
-#c {
-    margin: 50px 0px;
-    z-index: 5;
-
-}
-
-#ily {
-    position: fixed;
-    color: rgb(168, 123, 123);
-    font-family: monospace;
-    font-size: 10px;
-    z-index: 10;
-}
-
-#d {
-    margin: 150px 0px;
-    z-index: 5;
 }
 
 #intro_box {
